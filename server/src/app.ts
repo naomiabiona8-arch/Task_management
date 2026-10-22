@@ -36,8 +36,5 @@ startServer();
 
 // converts every requests to json (javaScript format)
 
-// naomiabiona8_db_user
-// ZFooXC8SbqzBZdAf
-// mongodb+srv://naomiabiona8_db_user:ZFooXC8SbqzBZdAf@cluster0.s2oeiec.mongodb.net/
 
 // cors = cross origin resource sharing
