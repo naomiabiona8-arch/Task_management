@@ -4,9 +4,15 @@ import axios from "axios";
 import type { Task, TaskInput } from "./types";
 
 // pages never write URLs themselves. They call these functions
+// const api = axios.create({
+//   baseURL: import.meta.env.VITE_API_URL,
+// });
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "/api",
+  baseURL: "https://task-management-yfdx.onrender.com/api",
 });
+
+console.log("API URL:", import.meta.env.VITE_API_URL);
 
 // post /api/tasks -> create a task
 export const createTask = async (task: TaskInput): Promise<Task> => {
@@ -16,7 +22,7 @@ export const createTask = async (task: TaskInput): Promise<Task> => {
 
 // GET /api/tasks/allTask -> all task
 export const getTasks = async (): Promise<Task[]> => {
-  const response = await api.get("/task/allTask");
+  const response = await api.get("/tasks/allTasks");
   return response.data.tasks;
 };
 
@@ -38,4 +44,15 @@ export const updateTask = async (
 // DELETE /api/tasks/:id -> delete a task
 export const deleteTask = async (id: string): Promise<void> => {
   await api.delete(`/tasks/${id}`);
+};
+
+// Turns any error into a message we can show users.
+// Our server always sends errors as {message: "..."},
+export const getErrorMessage = (error: unknown): string => {
+  if (axios.isAxiosError(error)) {
+    return (
+      error.response?.data?.message || "Cannot reach the server. is it running?"
+    );
+  }
+  return "Something went wrong";
 };
