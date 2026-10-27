@@ -48,11 +48,3 @@ export const deleteTask = async (id: string): Promise<void> => {
 
 // Turns any error into a message we can show users.
 // Our server always sends errors as {message: "..."},
-export const getErrorMessage = (error: unknown): string => {
-  if (axios.isAxiosError(error)) {
-    return (
-      error.response?.data?.message || "Cannot reach the server. is it running?"
-    );
-  }
-  return "Something went wrong";
-};
